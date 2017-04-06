@@ -1,10 +1,10 @@
-import duckduckgo
 import time
 from logger import Logger
 from killer import Killer
+from network import Network
 
 
-def load_wrong_answer():
+def load_wrong_ip():
     try:
         with open('wrong.txt', 'r') as the_file:
             return the_file.readline()
@@ -14,24 +14,21 @@ def load_wrong_answer():
 
 logger = Logger()
 killer = Killer(logger)
+network = Network(logger)
 
-wrong_answer = load_wrong_answer()
+wrong_ip = load_wrong_ip()
 seconds_to_wait = 10
 
 while True:
 
-    try:
-        r = duckduckgo.query('my ip')
-    except Exception, e:
-        logger.log(
-            'Something went wrong while accessing DDG: ' +
-            e.message)
+    ip = network.get_my_ip()
 
+    logger.log(ip)
+
+    if ip == '':
         killer.kill_p2p_processes()
 
-    logger.log(r.answer.text)
-
-    if r.answer.text == wrong_answer:
+    if ip == wrong_ip:
         killer.kill_p2p_processes()
 
     time.sleep(seconds_to_wait)

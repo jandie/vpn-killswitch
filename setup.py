@@ -1,18 +1,13 @@
-import duckduckgo
 import os
 from logger import Logger
+from network import Network
 
 FILE_NAME = 'wrong.txt'
 
-try:
-    r = duckduckgo.query('my ip')
-except Exception, e:
-    Logger().log(e)
-
-wrong_answer = r.answer.text
+wrong_ip = Network().get_my_ip(Logger())
 
 if os.path.isfile(FILE_NAME):
     os.remove(FILE_NAME)
 
 with open(FILE_NAME, 'a') as the_file:
-    the_file.write(wrong_answer)
+    the_file.write(wrong_ip)
