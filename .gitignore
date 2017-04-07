@@ -89,3 +89,4 @@ ENV/
 .ropeproject
 /wrong.txt
 /log.txt
+/config.txt
