@@ -1,5 +1,4 @@
 import commands
-from logger import Logger
 
 
 class Killer():
@@ -7,12 +6,13 @@ class Killer():
         self.logger = logger
         pass
 
-    def kill_p2p_processes(self):
+    def kill_process(self, name):
         try:
-            commands.getoutput('pkill -f webtorrent')
-            self.logger.log('Killed WebTorrent process')
-
-            commands.getoutput('pkill -f qbittorrent')
-            self.logger.log('Killed qBitTorrent process')
+            commands.getoutput('pkill -f ' + name)
+            self.logger.log('Killed ' + name + ' process')
         except Exception, e:
             print e.message
+
+    def kill_processes(self, processes):
+        for proces in processes:
+            self.kill_process(proces)
