@@ -1,5 +1,6 @@
 import json
 import os
+import logger
 
 
 class Config(object):
@@ -33,5 +34,8 @@ def save(config_value):
 
 
 def load():
-    with open("config.txt", "r") as the_file:
-        return json.loads(the_file.read(), object_hook = as_config)
+    try:
+        with open("config.txt", "r") as the_file:
+            return json.loads(the_file.read(), object_hook = as_config)
+    except Exception, e:
+        logger.Logger().log(e.message)

@@ -6,9 +6,12 @@ class Logger():
         pass
 
     def log(self, message):
-        output = str(datetime.datetime.now()) + ' ' + message
+        try:
+            output = str(datetime.datetime.now()) + ' ' + str(message)
 
-        with open('log.txt', 'a') as the_file:
-            the_file.write(output + '\n')
+            with open('log.txt', 'a') as the_file:
+                the_file.write(output + '\n')
 
-        print output
+            print output
+        except Exception, e:
+            print e.message

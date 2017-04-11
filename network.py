@@ -11,7 +11,7 @@ class Network():
             r = duckduckgo.query('my ip')
             ip = re.findall(r'[0-9]+(?:\.[0-9]+){3}', r.answer.text)[0]
         except Exception, e:
-            self.logger.log(e)
+            self.logger.log(e.message)
             ip = '-1'
 
         return ip
