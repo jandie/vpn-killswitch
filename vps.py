@@ -17,7 +17,7 @@ while True:
 
     logger.log(ip)
 
-    if ip == '':
+    if ip == '-1' or ip == '':
         killer.kill_processes(my_config.get_processes())
 
     if ip == my_config.get_wrong_ip():
