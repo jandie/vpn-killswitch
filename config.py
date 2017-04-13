@@ -36,6 +36,15 @@ def save(config_value):
 def load():
     try:
         with open("config.txt", "r") as the_file:
-            return json.loads(the_file.read(), object_hook = as_config)
+            cf = json.loads(the_file.read(), object_hook = as_config)
+
+            print cf.get_wrong_ip()
+
+            for name in cf.get_processes():
+                print name
+
+            return cf
+
     except Exception, e:
         logger.Logger().log(e.message)
+        exit()
