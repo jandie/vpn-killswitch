@@ -1,15 +1,19 @@
-import commands
+import psutil
 
 
 class Killer():
     def __init__(self, logger):
         self.logger = logger
-        pass
 
     def kill_process(self, name):
+
         try:
-            commands.getoutput('pkill -f ' + name)
-            self.logger.log('Killed ' + name + ' process')
+            for proc in psutil.process_iter():
+                if proc.name() == name:
+                    self.logger.log(
+                        'Killing ' + name + ' process...')
+                    proc.kill()
+
         except Exception, e:
             print e.message
 
