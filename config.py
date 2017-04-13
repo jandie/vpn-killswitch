@@ -1,9 +1,10 @@
 import json
 import os
+
 import logger
 
 
-class Config(object):
+class Config:
     def __init__(self, wrong_ip, processes):
         self.wrong_ip = wrong_ip
         self.processes = processes
@@ -14,7 +15,7 @@ class Config(object):
     def get_processes(self):
         return self.processes
 
-    def toJSON(self):
+    def to_json(self):
         return json.dumps(self, default=lambda o: o.__dict__,
                           sort_keys=True, indent=4)
 
@@ -27,7 +28,7 @@ def save(config_value):
     if os.path.isfile('config.txt'):
         os.remove('config.txt')
 
-    j_string = config_value.toJSON()
+    j_string = config_value.to_json()
 
     with open("config.txt", "w") as the_file:
         the_file.write(j_string)

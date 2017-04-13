@@ -1,8 +1,9 @@
-import duckduckgo
 import re
 
+import duckduckgo
 
-class Network():
+
+class Network:
     def __init__(self, logger):
         self.logger = logger
 
