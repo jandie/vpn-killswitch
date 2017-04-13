@@ -15,7 +15,7 @@ class Killer():
                     proc.kill()
 
         except Exception, e:
-            print e.message
+            print self.logger.log(e.message)
 
     def kill_processes(self, processes):
         for proces in processes:
