@@ -5,7 +5,8 @@ class Logger:
     def __init__(self):
         pass
 
-    def log(self, message):
+    @staticmethod
+    def log(message):
         try:
             output = str(datetime.datetime.now()) + ' ' + str(message)
 
