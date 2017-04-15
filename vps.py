@@ -1,15 +1,14 @@
 import time
-import config
-from logger import Logger
-from killer import Killer
-from network import Network
 
+import config
+from killer import Killer
+from logger import Logger
+from network import Network
 
 my_config = config.load()
 logger = Logger()
 killer = Killer(logger)
 network = Network(logger)
-seconds_to_wait = 10
 
 while True:
 
@@ -23,4 +22,4 @@ while True:
     if ip == my_config.get_wrong_ip():
         killer.kill_processes(my_config.get_processes())
 
-    time.sleep(seconds_to_wait)
+    time.sleep(float(my_config.get_frequency()))
