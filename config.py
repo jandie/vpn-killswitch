@@ -43,8 +43,8 @@ def load():
         with open("config.txt", "r") as the_file:
             cf = json.loads(the_file.read(), object_hook=as_config)
 
-            print "Wrong_ip: " + cf.get_wrong_ip()
-            print "Check frequency: " + cf.get_frequency()
+            print "Wrong_ip:", cf.get_wrong_ip()
+            print "Check frequency:", cf.get_frequency()
             print "Processes to kill:"
 
             for name in cf.get_processes():
