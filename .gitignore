@@ -95,3 +95,4 @@ ENV/
 .idea/modules.xml
 .idea/vpn-killswitch.iml
 .idea/workspace.xml
+.idea/vcs.xml
