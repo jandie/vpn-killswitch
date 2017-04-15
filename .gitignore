@@ -90,3 +90,8 @@ ENV/
 /wrong.txt
 /log.txt
 /config.txt
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/vpn-killswitch.iml
+.idea/workspace.xml
