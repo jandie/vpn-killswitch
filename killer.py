@@ -1,5 +1,38 @@
+import threading
+import time
+
 import psutil
 
+
+class TimeOutKiller(threading.Thread):
+    def __init__(self, timeout, killer):
+        threading.Thread.__init__(self)
+        self.timeout = timeout
+        self.setDaemon(True)
+        self.cancel = False
+        self.killer = killer
+
+    def run(self):
+        counter = 0
+
+        try:
+            while self.cancel:
+                time.sleep(1)
+                counter += 1
+
+                if self.cancel:
+                    raise RuntimeError()
+
+                if counter > self.timeout and not self.cancel:
+                    self.killer.kill_processes()
+        except RuntimeError:
+            pass  # ignore
+
+    def __enter__(self):
+        self.start()
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.cancel = False
 
 class Killer:
     def __init__(self, logger, processes):

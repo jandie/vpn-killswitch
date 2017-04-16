@@ -1,3 +1,4 @@
+import threading
 import time
 
 import config
@@ -15,7 +16,7 @@ while True:
     ip = network.get_my_ip()
 
     logger.log(ip)
-
+    print threading.active_count()
     if ip == '-1' or ip == '':
         killer.kill_processes()
 
