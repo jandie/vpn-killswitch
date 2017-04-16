@@ -34,6 +34,7 @@ class TimeOutKiller(threading.Thread):
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.cancel = False
 
+
 class Killer:
     def __init__(self, logger, processes):
         self.logger = logger
