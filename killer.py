@@ -21,12 +21,13 @@ class TimeOutKiller(threading.Thread):
 
             if counter > self.timeout and not self.cancel:
                 self.killer.kill_processes()
+                self.cancel = True
 
     def __enter__(self):
         self.start()
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        self.cancel = False
+        self.cancel = True
 
 
 class Killer:
