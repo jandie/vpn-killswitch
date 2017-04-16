@@ -15,18 +15,12 @@ class TimeOutKiller(threading.Thread):
     def run(self):
         counter = 0
 
-        try:
-            while self.cancel:
-                time.sleep(1)
-                counter += 1
+        while not self.cancel:
+            time.sleep(1)
+            counter += 1
 
-                if self.cancel:
-                    raise RuntimeError()
-
-                if counter > self.timeout and not self.cancel:
-                    self.killer.kill_processes()
-        except RuntimeError:
-            pass  # ignore
+            if counter > self.timeout and not self.cancel:
+                self.killer.kill_processes()
 
     def __enter__(self):
         self.start()
