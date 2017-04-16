@@ -7,8 +7,8 @@ from network import Network
 
 my_config = config.load()
 logger = Logger()
-killer = Killer(logger)
-network = Network(logger)
+killer = Killer(logger, my_config.get_processes())
+network = Network(logger, killer)
 
 while True:
 
@@ -17,9 +17,9 @@ while True:
     logger.log(ip)
 
     if ip == '-1' or ip == '':
-        killer.kill_processes(my_config.get_processes())
+        killer.kill_processes()
 
     if ip == my_config.get_wrong_ip():
-        killer.kill_processes(my_config.get_processes())
+        killer.kill_processes()
 
     time.sleep(float(my_config.get_frequency()))
