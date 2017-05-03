@@ -8,7 +8,7 @@ from network import Network
 my_config = config.load()
 logger = Logger()
 killer = Killer(logger, my_config.get_processes())
-network = Network(logger, killer)
+network = Network(logger, killer, my_config.get_time_out())
 
 while True:
 

@@ -6,9 +6,10 @@ from killer import TimeOutKiller
 
 
 class Network:
-    def __init__(self, logger, killer):
+    def __init__(self, logger, killer, time_out):
         self.logger = logger
         self.killer = killer
+        self.time_out = time_out
 
     def retrieve_ip_from_ddg(self):
         r = duckduckgo.query('my ip')
@@ -16,7 +17,7 @@ class Network:
 
     def get_my_ip(self):
         try:
-            with TimeOutKiller(10, self.killer):
+            with TimeOutKiller(self.time_out, self.killer):
                 return self.retrieve_ip_from_ddg()
         except Exception, e:
             self.logger.log(e)

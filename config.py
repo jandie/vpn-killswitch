@@ -5,10 +5,11 @@ import logger
 
 
 class Config:
-    def __init__(self, wrong_ip, frequency, processes):
+    def __init__(self, wrong_ip, frequency, processes, time_out):
         self.wrong_ip = wrong_ip
         self.frequency = frequency
         self.processes = processes
+        self.time_out = time_out
 
     def get_wrong_ip(self):
         return self.wrong_ip
@@ -19,13 +20,19 @@ class Config:
     def get_processes(self):
         return self.processes
 
+    def get_time_out(self):
+        return self.time_out
+
     def to_json(self):
         return json.dumps(self, default=lambda o: o.__dict__,
                           sort_keys=True, indent=4)
 
 
 def as_config(dct):
-    return Config(dct['wrong_ip'], dct['frequency'], dct['processes'])
+    return Config(dct['wrong_ip'],
+                  dct['frequency'],
+                  dct['processes'],
+                  dct['time_out'])
 
 
 def save(config_value):
@@ -43,8 +50,9 @@ def load():
         with open("config.txt", "r") as the_file:
             cf = json.loads(the_file.read(), object_hook=as_config)
 
-            print "Wrong_ip:", cf.get_wrong_ip()
+            print "Wrong ip:", cf.get_wrong_ip()
             print "Check frequency:", cf.get_frequency()
+            print "Time out: ", cf.get_time_out()
             print "Processes to kill:"
 
             for name in cf.get_processes():
